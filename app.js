@@ -12,7 +12,7 @@ app.get("/debug", (req, res) => {
     res.send("task manager app")
 })
 
-app.use('/api/vi/tasks', tasks)
+app.use('/api/v1/tasks', tasks)
 
 // middleware
 
