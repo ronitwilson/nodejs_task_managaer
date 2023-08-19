@@ -1,5 +1,6 @@
 const getAllTasks = (req, res) => {
-    res.send('sending all items')
+    console.log("reaches here")
+    res.json(req.body)
 }
 
 const createTask = (req, res) => {
@@ -7,7 +8,7 @@ const createTask = (req, res) => {
 }
 
 const getTask = (req, res) => {
-    res.send('get task')
+    res.json({id: req.params.id})
 }
 
 const updateTask = (req, res) => {
