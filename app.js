@@ -18,7 +18,7 @@ app.use(express.json())
 
 const start = async () =>  {
     try {
-        await connectDB
+         await connectDB()
         app.listen(port, ()=> {
             console.log(`Task Manager App log starting at port ${port} ....`)
         })

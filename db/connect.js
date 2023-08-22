@@ -1,16 +1,16 @@
 const mongoose = require('mongoose')
-const connectionString = 'mongodb+srv://rol:rolance@nodeexpressprj.qzc3tzo.mongodb.net/nodeAPP?retryWrites=true&w=majority'
+require('dotenv').config();
+
+const connectionString = process.env.MONGO_URI
 
 
 const connectDB = () => {
-    mongoose.connect(connectionString, {
+   return mongoose.connect(connectionString, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: true,
         useUnifiedTopology: true
-    }).then(() => { console.log("connectd to DB")}).catch((err) => console.log(err))
-}
+    }).then(() => {console.log("connected")});
+};
 
-module.exports = {
-    connectDB
-}
+module.exports = connectDB
