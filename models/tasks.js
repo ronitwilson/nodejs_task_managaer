@@ -11,7 +11,6 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
         default: false
-
     }
 })
 
