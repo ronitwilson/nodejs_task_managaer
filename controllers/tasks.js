@@ -36,8 +36,17 @@ const getTask = async (req, res) => {
     }
 }
 
-const updateTask = (req, res) => {
-    res.send('update task')
+const updateTask = async (req, res) => {
+    try {
+        const task_obj = await TaskModel.findOneAndUpdate({_id: req.params.id}, req.body)
+        if (task_obj) {
+            return
+        } else {
+            res.status(404).json({msg: "task with this id not found"})
+        }
+    } catch (error) {
+        res.status(501).json({msg:error})
+    }
 }
 
 const deleteTask = async(req, res) => {
