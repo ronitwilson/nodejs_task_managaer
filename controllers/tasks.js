@@ -38,7 +38,11 @@ const getTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
     try {
-        const task_obj = await TaskModel.findOneAndUpdate({_id: req.params.id}, req.body)
+        const task_obj = await TaskModel.findOneAndUpdate({_id: req.params.id}, req.body, {
+            new: true,
+            runValidators: true,
+            overwrite: true,
+        })
         if (task_obj) {
             return
         } else {
