@@ -3,6 +3,7 @@ const connectDB = require("./db/connect")
 const app = express();
 const port = 3000
 const tasks = require("./router/tasks")
+const notfound = require("./middleware/not-found")
 
 app.use(express.json())
 
@@ -14,7 +15,7 @@ app.use('/api/v1/tasks', tasks)
 
 // middleware
 
-
+app.use(notfound)
 
 
 const start = async () =>  {
