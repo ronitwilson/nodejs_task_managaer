@@ -1,14 +1,11 @@
 const TaskModel  = require("../models/tasks") 
+const asyncWrapper = require('../middleware/route-error-handler')
 
-const getAllTasks = async (req, res) => {
+const getAllTasks = asyncWrapper(async (req, res) => {
     console.log("get all tasks ")
-    try {
-        const tasks = await TaskModel.find({})
-        res.status(200).json({tasks})
-    } catch (error) {
-        res.status(500).json({error})
-    }
-}
+    const tasks = await TaskModel.find({})
+    res.status(200).json({tasks})
+})
 
 const createTask = async (req, res) => {
     console.log("creat task function")
