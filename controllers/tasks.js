@@ -1,5 +1,6 @@
 const TaskModel  = require("../models/tasks") 
 const asyncWrapper = require('../middleware/route-error-handler')
+const {createCustomError} = require('../errors/custom-errors')
 
 const getAllTasks = asyncWrapper(async (req, res) => {
     console.log("get all tasks ")
@@ -14,20 +15,20 @@ const createTask = asyncWrapper(async (req, res) => {
     res.status(201).json({task_obj})   
 })
 
-const getTask = async (req, res) => {
+const getTask = asyncWrapper(async (req, res, next) => {
     console.log(`get task with id ${req.params.id}`)
-    try {
         const task_obj = await TaskModel.findOne({_id: req.params.id})
         if (task_obj) {
             res.status(200).json({task: task_obj})
         } else {
-            res.status(404).json({msg: "task with this id not found"})
+            console.log("reach heree !!")
+            // const error = new Error('not found')
+            // error.status = 404
+            // return next(error)
+            return next(createCustomError("task with this id not found",402))
         }
         
-    } catch (error) {
-        res.status(501).json({msg:error})
-    }
-}
+})
 
 const updateTask = async (req, res) => {
     try {
