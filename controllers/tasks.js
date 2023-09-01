@@ -7,16 +7,12 @@ const getAllTasks = asyncWrapper(async (req, res) => {
     res.status(200).json({tasks})
 })
 
-const createTask = async (req, res) => {
+const createTask = asyncWrapper(async (req, res) => {
     console.log("creat task function")
     console.log(req.body)
-    try {
-        const task_obj = await TaskModel.create(req.body)
-        res.status(201).json({task_obj})   
-    } catch (error) {
-        res.status(500).json({error})        
-    }
-}
+    const task_obj = await TaskModel.create(req.body)
+    res.status(201).json({task_obj})   
+})
 
 const getTask = async (req, res) => {
     console.log(`get task with id ${req.params.id}`)
